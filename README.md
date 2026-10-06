@@ -5,11 +5,11 @@ This is the neural network I built as a novice in AI. As of 29/9/26, it can trac
 23/9/26:
 - I relearned some of the NumPy syntax, such as the difference between ‘*’ and ‘@’. Random seeding
 - I determined the nature of how I want my FNN to output; I want it to have multiple test cases x = [1, 2, 3] and have it output transformed output case y = [2, 3, 4]
-- Relearned basic structure of a neural network such as how pre-activation matrices correspond for the layers, and scheme of how information is passed
+- Relearned the basic structure of a neural network, such as how pre-activation matrices correspond to the layers, and the scheme of how information is passed
 
 25/9/26:
 - I still had more I needed to understand about matrix connections and how the function is implemented.
-- I intentionally struggled on my own without the help of AI to try and learn the structure. I mainly learned from rewatching a 3Blue1Brown video and NumPy documentation.
+- I intentionally struggled on my own without the help of AI to try and learn the structure. I mainly learned from rewatching a 3Blue1Brown video and the NumPy documentation.
 - However, I did use Claude to act almost like a teacher’s assistant, where it can’t actually give you any answers but only point you in the correct direction. That’s why I had it restricted to only give me small nudges and to never write any code for the project. Every line of the code was written by me or taken from the respective library’s documentation.
 
 26/9/26:
@@ -30,10 +30,16 @@ This is the neural network I built as a novice in AI. As of 29/9/26, it can trac
 
 29/9/26:
 - I wanted to test my network on the sine function first, as it is simple and it could actually prove my network was learning.
-- Today was fixing an issue with how values are initialized and scaled before going to the neural network. For example, I scaled my inputs (z-scaling) so that they’re restricted between -1 and 1, as I kept encountering integer overflow during training.
+- Today was spent fixing an issue with how values are initialized and scaled before going to the neural network. For example, I scaled my inputs (z-scaling) so that they’re restricted between -1 and 1, as I kept encountering integer overflow during training.
 - After scaling, the result was actually plotted, but it looked like a straight line.
 - It deduced it was an error with the cost function, as it only got to ~40 epochs
   - Side note: I also increased the layers of the network to 6, and it actually got the shape of a sine curve all the way up to the first hump; however, that doesn’t fix the cost issue itself; it just makes more calculations before the same error inevitably happens. Though, it did confirm that my backprop is actually working to some extent and weights are being adjusted to become more optimal, which was a good sign (sine).
   - Additionally, the network wasn’t capturing that sine was a repeating wave since it only had data between 0 and 2pi, which later, when I tried extrapolating after finally getting the curve to match, made it streak off into nowhere, presumably because of ReLU’s slope of 1 in the activation.
   - I actually don't remember exactly what I changed to fix the network's learning deficit, but I believe it was updating the function to be an average across the size of the inputs.
     - Additionally, I updated the learning rate and loss threshold to be smaller.
+
+5/10/26:
+- I added what I believe is autoregressivity, where I take past outputs to predict future outputs to extrapolate data. My wave looked pretty inaccurate at first and had damping; however, this was because my loss threshold was way too High. When I adjusted this alongside my learning rate, the errors carried through were less apparent
+- I trained my model on a data range of 0 to 2pi with a step of 0.1 and had it predict between 0 and 8pi.
+- I also expanded my number of rows from 1 to 2, while still outputting an output with 1 row.
+- Moreover, I increased the number of neurons in the hidden layer to 64 in hopes of making the curve look smoother, which it did.
