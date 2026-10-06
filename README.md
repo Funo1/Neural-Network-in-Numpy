@@ -1,5 +1,5 @@
 # Neural-Network-in-Numpy
-This is the neural network I built as a novice in AI. As of 29/9/26, it can trace the sine function, but my goal is to predict more complex functions.
+This is the feedforward neural network I built as a novice in AI. Last update: 05/10/26 -- Predicting values of sine via autoregressivity.
 
 
 23/9/26:
