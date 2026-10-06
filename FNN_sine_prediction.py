@@ -125,8 +125,9 @@ def backward_pass(net_result):
         prev_lay_activation = net_result[-(activations+2)]
 
         z_pre = weights[back_roll] @ prev_lay_activation + bias[back_roll]
-
-        Leaky_ReLU_derv = np.piecewise(z_pre, [z_pre == 0, z_pre != 0], [0.01, lambda z_pre: np.maximum(0.01*z_pre,z_pre)/z_pre ])
+        # Old ineffecient piecewise definition correction:
+        #~ Leaky_ReLU_derv = np.piecewise(z_pre, [z_pre == 0, z_pre != 0], [0.01, lambda z_pre: np.maximum(0.01*z_pre,z_pre)/z_pre ])
+        Leaky_ReLU_derv = np.piecewise(z_pre, [z_pre <= 0, z_pre > 0], [0.01, 1])
         if activations == 0:
             common_derv = cost_derivatives[activations]
         elif activations > 0:
